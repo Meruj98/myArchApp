@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/myArchApp.iml" filepath="$PROJECT_DIR$/.idea/modules/myArchApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MyArchApp.iml" filepath="$PROJECT_DIR$/.idea/modules/MyArchApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MyArchApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MyArchApp.app.iml" />
     </modules>
   </component>
 </project>
