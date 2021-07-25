@@ -1,21 +1,26 @@
 package co.realizeit.myarchapp.remote
 
 
+import co.realizeit.myarchapp.model.Article
 import co.realizeit.myarchapp.model.ArticlesResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import io.reactivex.Observable
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.flow.Flow
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.*
 
 object WebApiService {
     private var logging = HttpLoggingInterceptor()
@@ -57,7 +62,7 @@ object WebApiService {
         return Retrofit.Builder().client(apiClient)
             .baseUrl(AppPreferences.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
 
@@ -70,6 +75,6 @@ object WebApiService {
             @Query("from")from:String,
             @Query("sortBy")sortBy:String,
             @Query("apiKey")apiKey:String,
-        ):Deferred<Response<ArticlesResponse>>
+        ):Observable<ArticlesResponse>
     }
 }
