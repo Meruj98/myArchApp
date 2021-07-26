@@ -62,7 +62,7 @@ object WebApiService {
         return Retrofit.Builder().client(apiClient)
             .baseUrl(AppPreferences.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 
@@ -75,6 +75,6 @@ object WebApiService {
             @Query("from")from:String,
             @Query("sortBy")sortBy:String,
             @Query("apiKey")apiKey:String,
-        ):Observable<ArticlesResponse>
+        ):Deferred<Response<ArticlesResponse>>
     }
 }

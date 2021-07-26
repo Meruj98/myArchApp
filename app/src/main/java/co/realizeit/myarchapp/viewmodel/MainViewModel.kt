@@ -27,15 +27,10 @@ class MainViewModel : ViewModel() {
 
 
     fun getArticles(q: String, from: String, sortBy: String, apiKey: String) {
-        compositeDisposable.add(
-            webRepo.getEveryThingAboutTesla(q, from, sortBy, apiKey)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { response -> articlesLiveData.postValue(response) },
-                    { t -> Log.e("Error", t.message.toString()) }
-                )
-        )
+        scope.launch {
+            val response = webRepo.getEveryThingAboutTesla(q, from, sortBy, apiKey)
+            articlesLiveData.postValue(response)
+        }
     }
 
     // TODO: Implement the ViewModel
